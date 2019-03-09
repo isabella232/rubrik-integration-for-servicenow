@@ -2,10 +2,19 @@
 
 This document details the post-installation configuration steps for the Rubrik ServiceNow Integration. It includes steps for configuration and connectivity, as well as some troubleshooting steps. Application dependencies are detailed in the ‘External systems connection’ section of the document.
 
-# Application Dependencies
-•	List all plugins required: None
-•	List all system table permissions required: None
-3	Configuration Instructions
+# Prequisites
+
+Here's what is required to get started:
+
+* Integration components required: Rubrik CDM cluster, running RCDM version 4.0+ (**NOTE:** some elements require newer versions)
+* It is recommended to use a floating IP address for management of the cluster in order that management and monitoring can continue in the event that a node in the cluster is unavailable (instructions for configuring Floating IPs can be found in the Rubrik User Guide, See Rubrik User Guide, References entry 1)
+* Steps to create a dedicated integration user:
+
+    1.	 See Rubrik User Guide (References entry 1) for instructions on creating a user account. 
+    2.	The user account should be of the **Administrator** role type on the Rubrik system.
+    3.	The user account can be a **local** or **Active Directory** type account
+
+# Configuration Instructions
 
 | **NOTE:** The following tasks should be carried out as someone with ServiceNow admin permissions. |
 | --- |
@@ -34,7 +43,7 @@ The following steps are used to configure the application once it is installed:
 
 6.	Complete the fields in the table with the Rubrik connection details, note that the **Rubrik Site/Cluster Name** field is used as the display name for the Rubrik cluster when running reports or other catalog items.
 
-| **NOTE:** It is suggested to use a Floating IP for the **Rubrik Cluster Hostname or IP address** value, instructions on configuring a Floating IP can be found in the Rubrik CDM User Guide. Use of a Floating IP will help ensure that the application continues to function in the event of a node loss. |
+| NOTE: It is suggested to use a Floating IP for the **Rubrik Cluster Hostname or IP address** value, instructions on configuring a Floating IP can be found in the Rubrik CDM User Guide. Use of a Floating IP will help ensure that the application continues to function in the event of a node loss. |
 | --- |
 
 Select the MID Server which is most appropriate for connecting to the Rubrik cluster on-premises
@@ -42,6 +51,7 @@ Select the MID Server which is most appropriate for connecting to the Rubrik clu
 ![](/docs/img/image6.png)
 
 7.	Once done click **Order Now**
+
     
 ![](/docs/img/image7.png)
 
@@ -100,18 +110,7 @@ The following roles are required to access the Rubrik application:
 
 Note that adding a Rubrik Cluster relies on having access to the MID servers table, this typically requires the ‘admin’ role in ServiceNow. This can be removed once all clusters have been added.
 
-# External systems connection
-
-If your application contains integration components please clearly outlined them here and provide integration user creation instructions:
-
-* Integration components required: Rubrik CDM cluster, running RCDM version 4.0+ (**NOTE:** some elements require newer versions)
-* It is recommended to use a floating IP address for management of the cluster in order that management and monitoring can continue in the event that a node in the cluster is unavailable (instructions for configuring Floating IPs can be found in the Rubrik User Guide, See Rubrik User Guide, References entry 1)
-* Steps to create a dedicated integration user:
-    1.	 See Rubrik User Guide (References entry 1) for instructions on creating a user account. 
-    2.	The user account should be of the **Administrator** role type on the Rubrik system.
-    3.	The user account can be a **local** or **Active Directory** type account
-
-# Testing the configuration
+# Testing the Configuration
 
 Connectivity to the on-premises Rubrik cluster(s) will be via one or more ServiceNow MID Servers. These MID servers will require HTTPS (TCP/443) access to the Rubrik cluster in order to communicate with the Rubrik CDM REST API.
 
@@ -122,7 +121,7 @@ Once the application is installed, testing for connectivity to added Rubrik clus
 Issues with the Rubrik application are likely a result of communication issues between the MID Server and the Rubrik CDM cluster. These can be investigated through network troubleshooting from the MID Server:
 
 * Windows – can you access the Rubrik CDM Web UI via Chrome browser on the MID Server?
-* Linux – can you connect to port 443? (nc <rubrik_cluster_ip> 443):
+* Linux – can you connect to port 443? (`nc <rubrik_cluster_ip> 443`):
 
 ```
 HAL:~ user$ nc rubrik.demo.com 443 -v
