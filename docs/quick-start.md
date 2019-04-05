@@ -2,7 +2,7 @@
 
 This document details the post-installation configuration steps for the Rubrik ServiceNow Integration. It includes steps for configuration and connectivity, as well as some troubleshooting steps. Application dependencies are detailed in the ‘External systems connection’ section of the document.
 
-# Prequisites
+# Pre-requisites
 
 Here's what is required to get started:
 
