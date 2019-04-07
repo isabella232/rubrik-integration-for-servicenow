@@ -16,7 +16,7 @@ There are a few services you'll need in order to get this project off the ground
 
 * ServiceNow - portal used to provision new workloads
 * Rubrik CDM 4.0+ - the platform that protects provisioned workloads
-* [Rubrik Integration for ServiceNow](https://store.servicenow.com/sn_appstore_store.do#!/store/application/c4ec40c6db8f9340bc90d001cf96196e/2.1.3?referer=sn_appstore_store.do%23!%2Fstore%2Fsearch%3Fq%3Drubrik) - contains app for consuming Rubrik APIs with ServiceNow
+* [Rubrik Integration for ServiceNow](https://store.servicenow.com/sn_appstore_store.do#!/store/application/c4ec40c6db8f9340bc90d001cf96196e) - contains app for consuming Rubrik APIs with ServiceNow
 
 # :muscle: How You Can Help
 
