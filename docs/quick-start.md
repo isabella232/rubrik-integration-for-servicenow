@@ -65,7 +65,8 @@ There are a set of  scheduled workflows configured as part of the Rubrik Service
 
 | **Name** | **Default Frequency** | **Description** |
 |---|---|---|
-| Import SLA Domains | Every 4 hours | Gets backup history for all objects on the managed Rubrik clusters and stores them in the `Rubrik - Backup Histories` table |
+| Fetch Backup Histories | Every 4 hours | Gets backup history for all objects on the managed Rubrik clusters and stores them in the `Rubrik - Backup Histories` table |
+| Import SLA Domains | Every 4 hours | Gets details of SLA Domains on the managed Rubrik clusters and stores them in the `Rubrik - SLA Domains` table |
 | Import SQL Server Databases/Instances | Every 4 hours | Gets details for SQL Databases and Instances for Rubrik managed clusters and stores them in the `Rubrik – MSSQL Databases` and `Rubrik – MSSQL Instances` tables |
 | Get Failed Backups | Every 4 hours | Gets details for failed backup jobs from Rubrik managed clusters and stores them in the `Rubrik – Failed Backup Tasks` table |
 | Import VMware VMs | Every 4 hours | Gets details for VMware VMs for Rubrik managed clusters and stores them in the `Rubrik – VMware Virtual Machine` table |
@@ -87,18 +88,7 @@ The default timings should be fine for most deployments, although these can be t
 
 ![Repeat interval](/docs/img/image11.png)
 
-On first installation, these should be run manually in the following order, by going to each scheduled workflow and clicking **Execute Now**:
-
-* Import VMs
-* Import SLA Domains
-* Import Fileset Templates
-* Any active ‘Import \<snappable type\>’ workflows
-* Import Stats
-* Import Capacity Stats
-* Get Failed Backups
-* Fetch Restore History
-
-Leave around 5 mins between each workflow run to ensure this has completed. System log can be monitored to ensure the completion of each workflow.
+On first installation, or on addition of a new Rubrik cluster, the 'Initial Configuration Workflow' should be run to gather data from the connected Rubrik clusters. In the case that this is after the addition of a new cluster, the 'Clear existing tables' checkbox should be unchecked.
 
 The following roles provide access to the Rubrik application:
 
@@ -145,6 +135,7 @@ The below roles are not so broad, but rather can be used by customers to provide
 | rubrik_ci_create_vm_enable | Enables the Create VM and Assign SLA Catalog Item |
 | rubrik_ci_delete_cluster_enable | Enables the Delete a Rubrik Cluster Catalog Item |
 | rubrik_ci_export_ec2_snapshot_enable | Enables the Export an EC2 Snapshot Catalog Item |
+| rubrik_ci_initial_config_enable | Enables the Initial Configuration Workflow Catalog Item |
 | rubrik_ci_live_mount_sqldb_enable | Enables the Live Mount SQL Server Database Catalog Item |
 | rubrik_ci_reconfig_cluster_enable | Enables the Reconfigure an Existing Rubrik Cluster Catalog Item |
 | rubrik_ci_restore_file_enable | Enables the Recover a File/Folder Catalog Item |
@@ -162,6 +153,10 @@ Note that adding a Rubrik Cluster relies on having access to the MID servers tab
 Connectivity to the on-premises Rubrik cluster(s) will be via one or more ServiceNow MID Servers. These MID servers will require HTTPS (TCP/443) access to the Rubrik cluster in order to communicate with the Rubrik CDM REST API.
 
 Once the application is installed, testing for connectivity to added Rubrik clusters will be done as they are added via the included **Add a Rubrik Cluster** Catalog Item.
+
+## System Properties
+
+When collecting backup history, the number of rows in the `Rubrik - Backup Histories` table in large environments can become prohibitively large. To help prevent this, the `x_rubri_rubriksnow.retain_backup_history_days` System Property has been added to allow the retention of backup history records to be tuned by the customer. This defaults to 30 days, but the value of this property can be amended as required to increase/reduce the number of records kept.
 
 ## Troubleshooting
 
