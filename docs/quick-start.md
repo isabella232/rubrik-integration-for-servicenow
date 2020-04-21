@@ -139,6 +139,7 @@ The below roles are not so broad, but rather can be used by customers to provide
 | rubrik_ci_live_mount_sqldb_enable | Enables the Live Mount SQL Server Database Catalog Item |
 | rubrik_ci_reconfig_cluster_enable | Enables the Reconfigure an Existing Rubrik Cluster Catalog Item |
 | rubrik_ci_restore_file_enable | Enables the Recover a File/Folder Catalog Item |
+| rubrik_ci_restore_vm_enable | Enables the Recover a VMware Virtual Machine Catalog Item |
 | rubrik_ci_live_mount_vm_enable | Enables the Request a Live Mount Catalog Item |
 | rubrik_ci_restore_ec2_instance_enable | Enables the Restore an EC2 Instance Catalog Item |
 | rubrik_ci_take_ec2_snapshot_enable | Enables the Take an EC2 Instance Snapshot Catalog Item |
